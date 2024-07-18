@@ -1,0 +1,126 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle/
+build/
+**/build/
+
+# Eclipse
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.metadata/
+bin/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+.idea/*
+.idea/**/
+*.iws
+*.ipr
+*.iws
+*.iml
+out/
+.idea/workspace.xml
+.idea/libraries
+.idea/shelf
+.idea/modules.xml
+.idea/.name
+.idea/workspace.xml
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# VS Code
+.vscode/
+
+# Spring Boot
+*.war
+*.ear
+spring.log
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+# Others
+# Windows
+Thumbs.db
+ehthumbs.db
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux
+*~
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.tar.bz2
+*.tar
+*.gz
+*.bz2
+*.xz
+*.7z
+*.bak
+*.tmp
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Temp
+temp/
+tmp/
+
+# JetBrains IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
