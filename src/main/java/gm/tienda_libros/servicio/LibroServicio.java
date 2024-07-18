@@ -3,9 +3,11 @@ package gm.tienda_libros.servicio;
 import gm.tienda_libros.modelo.Libro;
 import gm.tienda_libros.repositorio.LibroRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LibroServicio implements ILibroServicio{
 
     @Autowired // Para que Spring inyecte una instancia de este objeto
