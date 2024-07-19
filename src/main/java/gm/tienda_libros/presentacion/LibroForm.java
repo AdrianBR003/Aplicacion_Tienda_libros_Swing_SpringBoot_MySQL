@@ -1,5 +1,6 @@
 package gm.tienda_libros.presentacion;
 
+import gm.tienda_libros.modelo.Libro;
 import gm.tienda_libros.servicio.LibroServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,9 +35,7 @@ public class LibroForm extends JFrame {
         iniciarForma();
 
         // Boton Agregar - Accion Listener
-        Agregar.addActionListener(e -> {
-
-        });
+        Agregar.addActionListener(e -> agregarLibro());
     }
 
     private void iniciarForma(){
@@ -50,6 +49,55 @@ public class LibroForm extends JFrame {
         int y = (tamanioPantalla.height - getHeight()/2);
         setLocation(x,y); // El punto donde se muestra nuestra aplicacion
 
+    }
+
+    private void agregarLibro(){
+        // Leer los valores del formulario
+        if(libroTexto.getText().isEmpty()){
+            mostrarMensaje("Proporciona el nombre del libro");
+            libroTexto.requestFocusInWindow(); // Para cambiar el cursor
+            return;
+        }else if(autorTexto.getText().isEmpty()){
+            mostrarMensaje("Proporciona el autor del libro");
+            libroTexto.requestFocusInWindow(); // Para cambiar el cursor
+            return;
+        }else if(precioTexto.getText().isEmpty()){
+            mostrarMensaje("Proporciona el precio del libro");
+            libroTexto.requestFocusInWindow(); // Para cambiar el cursor
+            return;
+        }else if(existenciasTexto.getText().isEmpty()){
+            mostrarMensaje("Proporciona el numero de existencias del libro");
+            libroTexto.requestFocusInWindow(); // Para cambiar el cursor
+            return;
+        }else {
+            // SE PUEDE SIMPLIFICAR!!!
+            var nombreLibro = libroTexto.getText();
+            var autor = autorTexto.getText();
+            var precio = Double.parseDouble(precioTexto.getText());
+            var existencias = Integer.parseInt(existenciasTexto.getText());
+            // Crear el objeto libro
+            var libro = new Libro(null, nombreLibro, autor, precio, existencias);
+//        libro.setNombrelibro(nombreLibro);
+//        libro.setAutor(autor);
+//        libro.setPrecio(precio);
+//        libro.setExistencias(existencias);
+            this.libroServicio.guardarLibro(libro); // Como la id = 0, se creara una nueva instancia
+            mostrarMensaje("Se agrego el Libro...");
+            limpiarFormulario();
+            // Tenemos que recargar de nuevo los valores de la tabla
+            listarLibros();
+        }
+    }
+
+    private void limpiarFormulario(){
+        libroTexto.setText("");
+        autorTexto.setText("");
+        precioTexto.setText("");
+        existenciasTexto.setText("");
+    }
+
+    private void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(this,mensaje); // Mandar un mensaje alerta
     }
 
     private void createUIComponents() { // Personalizar los componentes de la tabla
