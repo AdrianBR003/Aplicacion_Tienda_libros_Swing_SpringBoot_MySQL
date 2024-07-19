@@ -18,6 +18,13 @@ public class LibroForm extends JFrame {
     LibroServicio libroServicio;
     private JPanel panel;
     private JTable tablaLibros;
+    private JTextField libroTexto;
+    private JTextField autorTexto;
+    private JTextField precioTexto;
+    private JTextField existenciasTexto;
+    private JButton Agregar;
+    private JButton modificarButton;
+    private JButton eliminarButton;
     private DefaultTableModel tablaModeloLibros;
 
     // Para injectar Spring vamos a hacerlo a traves del constructo en vez de un atributo
@@ -25,6 +32,11 @@ public class LibroForm extends JFrame {
     public LibroForm(LibroServicio libroServicio){
         this.libroServicio = libroServicio;
         iniciarForma();
+
+        // Boton Agregar - Accion Listener
+        Agregar.addActionListener(e -> {
+
+        });
     }
 
     private void iniciarForma(){
