@@ -22,7 +22,7 @@ public class TiendaLibrosApplication {
 		// Ejecutamos el codigo para cargar el formulario
 		EventQueue.invokeLater(()->{
 			// Obtenemos el objeto form a traves de Spring || IMPORTANTE!!
-			LibroForm libroForm = contextoSpring.getBean(LibroForm.class);
+			LibroForm libroForm = contextoSpring.getBean(LibroForm.class); // Obtener la instancia de LibroForm
 			libroForm.setVisible(true);
 		});
 	}

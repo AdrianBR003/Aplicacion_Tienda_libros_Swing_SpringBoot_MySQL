@@ -1,12 +1,11 @@
 package gm.tienda_libros.presentacion;
 
-import gm.tienda_libros.modelo.Libro;
 import gm.tienda_libros.servicio.LibroServicio;
-import org.hibernate.annotations.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 /*
@@ -18,6 +17,8 @@ public class LibroForm extends JFrame {
 
     LibroServicio libroServicio;
     private JPanel panel;
+    private JTable tablaLibros;
+    private DefaultTableModel tablaModeloLibros;
 
     // Para injectar Spring vamos a hacerlo a traves del constructo en vez de un atributo
     @Autowired
@@ -36,6 +37,16 @@ public class LibroForm extends JFrame {
         int x = (tamanioPantalla.width - getWidth()/2);
         int y = (tamanioPantalla.height - getHeight()/2);
         setLocation(x,y); // El punto donde se muestra nuestra aplicacion
+
+    }
+
+    private void createUIComponents() { // Personalizar los componentes de la tabla
+        // TODO: place custom component creation code here
+        this.tablaModeloLibros = new DefaultTableModel(0,5); // En un inicio 0 filas, 5 columnas
+        String[] cabeceros = {"Id", "Libro", "Autor", "Precio", "Existencias"};
+        this.tablaModeloLibros.setColumnIdentifiers(cabeceros);
+        // Instancia el objeto JTable
+        this.tablaLibros = new JTable(tablaModeloLibros); // Este es el modelo que debe de seguir
 
     }
 }
