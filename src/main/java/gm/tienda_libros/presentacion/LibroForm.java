@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -57,7 +55,9 @@ public class LibroForm extends JFrame {
             }
         });
         // Boton Modificar - Accion Listener
-        modificarButton.addActionListener(e -> modificarLibro ());
+        modificarButton.addActionListener(e -> modificarLibro());
+        // Boton Eliminar - Accion Listener
+        eliminarButton.addActionListener(e -> eliminarLibro());
     }
 
     private void iniciarForma(){
@@ -78,19 +78,15 @@ public class LibroForm extends JFrame {
         if(libroTexto.getText().isEmpty()){
             mostrarMensaje("Proporciona el nombre del libro");
             libroTexto.requestFocusInWindow(); // Para cambiar el cursor
-            return;
         }else if(autorTexto.getText().isEmpty()){
             mostrarMensaje("Proporciona el autor del libro");
             libroTexto.requestFocusInWindow(); // Para cambiar el cursor
-            return;
         }else if(precioTexto.getText().isEmpty()){
             mostrarMensaje("Proporciona el precio del libro");
             libroTexto.requestFocusInWindow(); // Para cambiar el cursor
-            return;
         }else if(existenciasTexto.getText().isEmpty()){
             mostrarMensaje("Proporciona el numero de existencias del libro");
             libroTexto.requestFocusInWindow(); // Para cambiar el cursor
-            return;
         }else {
             // SE PUEDE SIMPLIFICAR!!!
             var nombreLibro = libroTexto.getText();
@@ -136,16 +132,9 @@ public class LibroForm extends JFrame {
             if(libroTexto.getText().isEmpty()){
                 mostrarMensaje("Proporciona al menos, el nombre del Libro");
                 libroTexto.requestFocusInWindow();
-                return;
             }else{
                 // Llamamos al objeto libro a actualizar
-                int idLibro = Integer.parseInt(idTexto.getText());
-                var nombreLibro = libroTexto.getText();
-                var autor = autorTexto.getText();
-                var precio = Double.parseDouble(precioTexto.getText());
-                var existencias = Integer.parseInt(existenciasTexto.getText());
-
-                var libro = new Libro(idLibro, nombreLibro, autor, precio, existencias); // Como el id != null, significa que para la base de datos será una modificacion
+                var libro = getLibro();
                 libroServicio.guardarLibro(libro);
                 mostrarMensaje("Se modifico el Libro ");
                 limpiarFormulario();
@@ -154,6 +143,35 @@ public class LibroForm extends JFrame {
         }
     }
 
+    private Libro getLibro() {
+        int idLibro = Integer.parseInt(idTexto.getText());
+        var nombreLibro = libroTexto.getText();
+        var autor = autorTexto.getText();
+        var precio = Double.parseDouble(precioTexto.getText());
+        var existencias = Integer.parseInt(existenciasTexto.getText());
+
+        return new Libro(idLibro, nombreLibro, autor, precio, existencias);
+    }
+
+    private void eliminarLibro(){
+        if(this.idTexto.getText().isEmpty()){
+            mostrarMensaje("Debe seleccinar un registro");
+        }else{
+                // Llamamos al objeto libro a eliminar
+                int idLibro = Integer.parseInt(idTexto.getText());
+                var nombreLibro = libroTexto.getText();
+                var autor = autorTexto.getText();
+                var precio = Double.parseDouble(precioTexto.getText());
+                var existencias = Integer.parseInt(existenciasTexto.getText());
+
+                var libro = new Libro(idLibro, nombreLibro, autor, precio, existencias); // Como el id != null, significa que para la base de datos será una modificacion
+                libroServicio.eliminarLibro(libro);
+                mostrarMensaje("Se elimino el Libro con el nombre: " + nombreLibro);
+                limpiarFormulario();
+                listarLibros();
+            }
+        }
+    
     private void limpiarFormulario(){
         libroTexto.setText("");
         autorTexto.setText("");
@@ -199,5 +217,5 @@ public class LibroForm extends JFrame {
 
     }
 
-
 }
+
